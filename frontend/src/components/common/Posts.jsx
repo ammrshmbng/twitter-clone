@@ -2,6 +2,7 @@ import Post from "./Post";
 import PostSkeleton from "../skeletons/PostSkeleton";
 import { POSTS } from "../../utils/db/dummy";
 import { useQuery } from "@tanstack/react-query";
+import { useEffect } from "react";
 
 
 const Posts = ({ feedType, username, userId }) => {
@@ -46,9 +47,13 @@ const Posts = ({ feedType, username, userId }) => {
 		},
 	});
 
+	useEffect(() => {
+		refetch();
+	}, [feedType, refetch, username]);
+
 	return (
 		<>
-			{isLoading && (
+			{(isLoading || isRefetching) && (
 				<div className='flex flex-col justify-center'>
 					<PostSkeleton />
 					<PostSkeleton />
