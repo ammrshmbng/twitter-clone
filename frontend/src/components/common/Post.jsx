@@ -5,13 +5,18 @@ import { FaRegBookmark } from "react-icons/fa6";
 import { FaTrash } from "react-icons/fa";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 
 const Post = ({ post }) => {
 	const [comment, setComment] = useState("");
+	const { data: authUser } = useQuery({ queryKey: ["authUser"] });
+
+
 	const postOwner = post.user;
 	const isLiked = false;
 
-	const isMyPost = true;
+	const isMyPost = authUser._id === post.user._id;
+
 
 	const formattedDate = "1h";
 
