@@ -111,7 +111,9 @@ const EditProfileModal = ({ authUser }) => {
 							name='link'
 							onChange={handleInputChange}
 						/>
-						{isUpdatingProfile ? "Updating..." : "Update"}
+						<button className='text-white rounded-full btn btn-primary btn-sm'>
+							{isUpdatingProfile ? "Updating..." : "Update"}
+						</button>
 					</form>
 				</div>
 				<form method='dialog' className='modal-backdrop'>
