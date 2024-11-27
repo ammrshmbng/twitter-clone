@@ -62,10 +62,10 @@ const ProfilePage = () => {
 		<>
 			<div className='flex-[4_4_0]  border-r border-gray-700 min-h-screen '>
 				{/* HEADER */}
-				{isLoading && <ProfileHeaderSkeleton />}
-				{!isLoading && !user && <p className='mt-4 text-lg text-center'>User not found</p>}
+				{(isLoading || isRefetching) && <ProfileHeaderSkeleton />}
+				{!isLoading && !isRefetching && !user && <p className='mt-4 text-lg text-center'>User not found</p>}
 				<div className='flex flex-col'>
-					{!isLoading && user && (
+				{!isLoading && !isRefetching && user && (
 						<>
 							<div className='flex items-center gap-10 px-4 py-2'>
 								<Link to='/'>
