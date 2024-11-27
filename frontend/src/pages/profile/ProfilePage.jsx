@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 import Posts from "../../components/common/Posts";
@@ -57,6 +57,10 @@ const ProfilePage = () => {
 			reader.readAsDataURL(file);
 		}
 	};
+
+	useEffect(() => {
+		refetch();
+	}, [username, refetch]);
 
 	return (
 		<>
