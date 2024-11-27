@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import Posts from "../../components/common/Posts";
 import ProfileHeaderSkeleton from "../../components/skeletons/ProfileHeaderSkeleton";
@@ -11,29 +11,40 @@ import { FaArrowLeft } from "react-icons/fa6";
 import { IoCalendarOutline } from "react-icons/io5";
 import { FaLink } from "react-icons/fa";
 import { MdEdit } from "react-icons/md";
+import { useQuery } from "@tanstack/react-query";
 
 const ProfilePage = () => {
 	const [coverImg, setCoverImg] = useState(null);
 	const [profileImg, setProfileImg] = useState(null);
 	const [feedType, setFeedType] = useState("posts");
+	const { username } = useParams();
+
 
 	const coverImgRef = useRef(null);
 	const profileImgRef = useRef(null);
 
-	const isLoading = false;
 	const isMyProfile = true;
 
-	const user = {
-		_id: "1",
-		fullName: "John Doe",
-		username: "johndoe",
-		profileImg: "/avatars/boy2.png",
-		coverImg: "/cover.png",
-		bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-		link: "https://youtube.com/@asaprogrammer_",
-		following: ["1", "2", "3"],
-		followers: ["1", "2", "3"],
-	};
+	const {
+		data: user,
+		isLoading,
+		refetch,
+		isRefetching,
+	} = useQuery({
+		queryKey: ["userProfile"],
+		queryFn: async () => {
+			try {
+				const res = await fetch(`/api/users/profile/${username}`);
+				const data = await res.json();
+				if (!res.ok) {
+					throw new Error(data.error || "Something went wrong");
+				}
+				return data;
+			} catch (error) {
+				throw new Error(error);
+			}
+		},
+	});
 
 	const handleImgChange = (e, state) => {
 		const file = e.target.files[0];
