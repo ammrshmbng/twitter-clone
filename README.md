@@ -1,7 +1,7 @@
 
 # 🐦 Twitter Clone - MERN Stack Project
 
-![Demo App](https://i.ibb.co/f8y9vGS/Group-82.png)
+
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://semver.org)
