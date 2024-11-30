@@ -6,7 +6,9 @@
 	"scripts": {
     "dev": "NODE_ENV=development nodemon backend/server.js",
     "start": "NODE_ENV=production node backend/server.js",
-    "build": "cd frontend && npm install && npm run build"
+    "build": "cd frontend && npm install && npm run build",
+    "install-client": "cd frontend && npm install",
+    "railway-postbuild": "npm run install-client && npm run build"
   },
 	"keywords": [],
 	"author": "",
