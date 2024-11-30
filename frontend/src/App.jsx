@@ -50,7 +50,7 @@ function App() {
 				<Route path='/profile/:username' element={authUser ? <ProfilePage /> : <Navigate to='/login' />} />
 
             </Routes>
-            <RightPanel/>
+            {authUser && <RightPanel/>}
             <Toaster />
         </div>
     );
