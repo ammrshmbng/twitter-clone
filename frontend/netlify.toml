@@ -1,0 +1,10 @@
+[[redirects]]
+  from = "/api/*"
+  to = "https://twitter-clone-production-8ae4.up.railway.app/api/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200 

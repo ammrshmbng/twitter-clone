@@ -18,7 +18,7 @@ export default defineConfig({
 		port: 3000,
 		proxy: {
 			"/api": {
-				target: "http://localhost:5000",
+				target: "https://twitter-clone-production-8ae4.up.railway.app",
 				changeOrigin: true,
 			},
 		},

@@ -9,6 +9,7 @@ import notificationRoutes from "./routes/notification.route.js";
 import connectMongoDB from "./db/connectMongoDB.js";
 import cookieParser from "cookie-parser";
 import { v2 as cloudinary } from "cloudinary";
+import cors from "cors";
 
 // Fix __dirname untuk ES modules
 const __filename = fileURLToPath(import.meta.url);
@@ -29,6 +30,13 @@ app.use(express.json({ limit: "5mb" }));
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
+app.use(
+	cors({
+	  origin:["https://mare-twitter-clone.netlify.app", "http://localhost:3000"],
+	  credentials: true,
+	})
+  );
+
 // API routes
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
@@ -36,19 +44,19 @@ app.use("/api/posts", postRoutes);
 app.use("/api/notifications", notificationRoutes);
 
 // Serve frontend static files in production
-if (process.env.NODE_ENV === "production") {
-	app.use(express.static(path.join(__dirname, "../frontend/dist")));
+// if (process.env.NODE_ENV === "production") {
+// 	app.use(express.static(path.join(__dirname, "../frontend/dist")));
 	
-	app.get("*", (req, res) => {
-		res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
-	});
-}
+// 	app.get("*", (req, res) => {
+// 		res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
+// 	});
+// }
 
-// Error handling middleware
-app.use((err, req, res, next) => {
-	console.error(err.stack);
-	res.status(500).send('Something broke!');
-});
+// // Error handling middleware
+// app.use((err, req, res, next) => {
+// 	console.error(err.stack);
+// 	res.status(500).send('Something broke!');
+// });
 
 app.listen(PORT, () => {
 	console.log(`Server running on port ${PORT}`);
